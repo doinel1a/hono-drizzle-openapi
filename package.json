@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Doinel Atanasiu",
+    "email": "doinel+github@atanasiu.me",
+    "url": "https://business-link.d1a.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doinel1a/node-ts-base"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "dev": "tsx src/env.ts && tsx watch src/index.ts",
+    "build": "tsx src/env.ts && rimraf dist && tsc",
+    "start": "tsx src/env.ts && node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write **/**/*.{js,mjs,cjs,ts,mts,cts} --cache"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "0.13.10",
+    "dotenv": "17.3.1",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "20.4.2",
+    "@commitlint/config-conventional": "20.4.2",
+    "@ianvs/prettier-plugin-sort-imports": "4.7.1",
+    "@types/node": "25.3.3",
+    "eslint": "10.0.2",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.5",
+    "eslint-plugin-sonarjs": "4.0.0",
+    "eslint-plugin-unicorn": "63.0.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.3.2",
+    "prettier": "3.8.1",
+    "rimraf": "6.1.3",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.56.1"
+  }
+}
