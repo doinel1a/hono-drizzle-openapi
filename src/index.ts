@@ -1,14 +1,11 @@
 import { serve } from '@hono/node-server';
-import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { env } from './env';
-
-const app = new OpenAPIHono();
-app.get('/', (c) => c.text('Hello, World!'));
+import server from './sever';
 
 serve(
   {
-    fetch: app.fetch,
+    fetch: server.fetch,
     port: env.PORT
   },
   (info) => {
