@@ -19,9 +19,7 @@ export default defineConfig([
       'unicorn/prevent-abbreviations': [
         'error',
         {
-          allowList: {
-            env: true
-          }
+          ignore: [/env/i, /doc/i]
         }
       ]
     }
