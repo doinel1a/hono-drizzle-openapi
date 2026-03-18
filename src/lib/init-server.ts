@@ -6,7 +6,7 @@ import notFound from '@/middlewares/not-found';
 import onError from '@/middlewares/on-error';
 
 export default function initServer() {
-  const server = new OpenAPIHono();
+  const server = new OpenAPIHono({ strict: false });
   server.use(
     honoLogLayer({
       instance: logger,
