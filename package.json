@@ -1,0 +1,77 @@
+{
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Doinel Atanasiu",
+    "email": "doinel+github@atanasiu.me",
+    "url": "https://links.atanasiu.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doinel1a/hono-bauth-drizzle-openapi"
+  },
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=11"
+  },
+  "packageManager": "pnpm@11.5.0",
+  "scripts": {
+    "prepare": "husky",
+    "dev": "tsx src/env.ts && tsx watch src/index.ts",
+    "build": "tsup",
+    "start": "tsx src/env.ts && node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write **/**/*.{js,mjs,cjs,ts,mts,cts} --cache",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "ba:auth": "npx auth@latest generate",
+    "db:studio": "drizzle-kit --config=drizzle/config.ts studio",
+    "db:push": "drizzle-kit --config=drizzle/config.ts push",
+    "db:create-migration": "drizzle-kit --config=drizzle/config.ts generate",
+    "db:migrate": "drizzle-kit --config=drizzle/config.ts migrate"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.0.6",
+    "@hono/zod-openapi": "1.4.0",
+    "@loglayer/hono": "2.3.0",
+    "@loglayer/transport-simple-pretty-terminal": "3.2.0",
+    "@scalar/hono-api-reference": "0.11.7",
+    "@t3-oss/env-core": "0.13.11",
+    "better-auth": "1.6.23",
+    "dotenv": "17.4.2",
+    "drizzle-orm": "0.45.2",
+    "drizzle-zod": "0.8.3",
+    "hono": "4.12.27",
+    "loglayer": "9.3.0",
+    "pg": "8.22.0",
+    "serialize-error": "13.0.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.2.0",
+    "@commitlint/config-conventional": "21.2.0",
+    "@electric-sql/pglite": "0.5.3",
+    "@ianvs/prettier-plugin-sort-imports": "4.7.1",
+    "@types/node": "26.0.1",
+    "@types/pg": "8.20.0",
+    "@vitest/coverage-v8": "4.1.9",
+    "drizzle-kit": "0.31.10",
+    "eslint": "10.6.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-drizzle": "0.2.3",
+    "eslint-plugin-prettier": "5.5.6",
+    "eslint-plugin-sonarjs": "4.1.0",
+    "eslint-plugin-unicorn": "69.0.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.8",
+    "prettier": "3.9.4",
+    "tsup": "8.5.1",
+    "tsx": "4.22.4",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.62.1",
+    "vitest": "4.1.9"
+  }
+}
