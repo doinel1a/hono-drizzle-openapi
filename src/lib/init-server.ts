@@ -1,3 +1,5 @@
+import type { TServerBindings } from './types';
+
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { honoLogLayer } from '@loglayer/hono';
 
@@ -23,5 +25,5 @@ export default function initServer() {
 }
 
 export function createRouter() {
-  return new OpenAPIHono({ strict: false });
+  return new OpenAPIHono<TServerBindings>({ strict: false });
 }

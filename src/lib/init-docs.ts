@@ -1,8 +1,8 @@
-import type { OpenAPIHono } from '@hono/zod-openapi';
+import type { TOpenApiServer } from './types';
 
 import { Scalar } from '@scalar/hono-api-reference';
 
-export default function initDocs(server: OpenAPIHono) {
+export default function initDocs(server: TOpenApiServer) {
   server.doc('/docs', {
     openapi: '3.0.0',
     info: {
