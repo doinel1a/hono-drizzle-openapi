@@ -6,7 +6,7 @@ import notFound from '@/middlewares/not-found';
 import onError from '@/middlewares/on-error';
 
 export default function initServer() {
-  const server = new OpenAPIHono({ strict: false });
+  const server = createRouter();
   server.use(
     honoLogLayer({
       instance: logger,
@@ -20,4 +20,8 @@ export default function initServer() {
   server.onError(onError);
 
   return server;
+}
+
+export function createRouter() {
+  return new OpenAPIHono({ strict: false });
 }
