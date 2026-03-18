@@ -6,11 +6,11 @@ config();
 
 export const env = createEnv({
   server: {
-    PLACEHOLDER: z.string(),
+    PORT: z.coerce.number(),
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development')
   },
   runtimeEnvStrict: {
-    PLACEHOLDER: process.env.PLACEHOLDER,
+    PORT: process.env.PORT,
     NODE_ENV: process.env.NODE_ENV
   },
   /**
