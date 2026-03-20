@@ -34,7 +34,9 @@
     /* Path Aliases */
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~/db": ["./db/index.ts"],
+      "~/db/*": ["./db/*"]
     },
 
     "types": ["node"]
