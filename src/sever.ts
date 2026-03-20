@@ -1,8 +1,8 @@
 import initDocs from '@/lib/init-docs';
 import initServer from '@/lib/init-server';
-import indexRoute from '@/routes/index.route';
+import tasksRoute from '@/routes/tasks/_index';
 
-const routes = [indexRoute];
+const routes = [tasksRoute];
 
 const server = initServer();
 initDocs(server);
