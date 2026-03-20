@@ -19,7 +19,11 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write **/**/*.{js,mjs,cjs,ts,mts,cts} --cache"
+    "format": "prettier --write **/**/*.{js,mjs,cjs,ts,mts,cts} --cache",
+    "db:studio": "drizzle-kit --config=db/config.ts studio",
+    "db:push": "drizzle-kit --config=db/config.ts push",
+    "db:create-migration": "drizzle-kit --config=db/config.ts generate",
+    "db:migrate": "drizzle-kit --config=db/config.ts migrate"
   },
   "dependencies": {
     "@hono/node-server": "1.19.11",
@@ -29,8 +33,10 @@
     "@scalar/hono-api-reference": "0.10.4",
     "@t3-oss/env-core": "0.13.10",
     "dotenv": "17.3.1",
+    "drizzle-orm": "0.45.1",
     "hono": "4.12.8",
     "loglayer": "9.1.0",
+    "pg": "8.20.0",
     "serialize-error": "13.0.1",
     "zod": "4.3.6"
   },
@@ -39,8 +45,11 @@
     "@commitlint/config-conventional": "20.5.0",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
     "@types/node": "25.5.0",
+    "@types/pg": "8.18.0",
+    "drizzle-kit": "0.31.10",
     "eslint": "10.0.3",
     "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-drizzle": "0.2.3",
     "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-sonarjs": "4.0.2",
     "eslint-plugin-unicorn": "63.0.0",

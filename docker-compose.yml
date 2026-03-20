@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17
+    container_name: db_hono_todo_openapi
+    environment:
+      POSTGRES_DB: db_v1
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5433:5432'
+    volumes:
+      - db_data_hono_todo_openapi:/var/lib/postgresql/data
+    networks:
+      - db_network_hono_todo_openapi
+
+  pgadmin:
+    image: dpage/pgadmin4:9.3
+    container_name: pgadmin_hono_todo_openapi
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '8080:80'
+    networks:
+      - db_network_hono_todo_openapi
+
+volumes:
+  db_data_hono_todo_openapi:
+
+networks:
+  db_network_hono_todo_openapi:
+    driver: bridge
