@@ -7,10 +7,12 @@ config();
 export const env = createEnv({
   server: {
     PORT: z.coerce.number(),
+    DATABASE_URL: z.url(),
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development')
   },
   runtimeEnvStrict: {
     PORT: process.env.PORT,
+    DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV
   },
   /**
