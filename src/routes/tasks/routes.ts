@@ -1,5 +1,5 @@
 import { createRoute, z } from '@hono/zod-openapi';
-import { insertTasksSchema, patchTodoSchema, selectTasksSchema } from '~/db/schemas/tasks';
+import { insertTasksSchema, patchTodoSchema, selectTasksSchema } from '~/drizzle/schemas/tasks';
 
 import {
   CONFLICT_CODE,
