@@ -3,12 +3,12 @@ import { Pool } from 'pg';
 
 import { env } from '@/env';
 
-import { tasks } from './schemas/tasks';
+import { tasksSchema } from './schemas/tasks';
 
 const pool = new Pool({
   connectionString: env.DATABASE_URL
 });
 
-const db = drizzle({ client: pool, schema: { tasks } });
+const db = drizzle({ client: pool, schema: { tasks: tasksSchema } });
 
 export default db;
