@@ -9,8 +9,8 @@ import type {
   TSelectByIdRoute
 } from './routes';
 
-import db from '~/db';
-import { tasksSchema } from '~/db/schemas/tasks';
+import db from '~/drizzle/db';
+import { tasksSchema } from '~/drizzle/schemas/tasks';
 import { eq } from 'drizzle-orm';
 
 import {
