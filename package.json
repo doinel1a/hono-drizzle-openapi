@@ -34,6 +34,7 @@
     "@t3-oss/env-core": "0.13.10",
     "dotenv": "17.3.1",
     "drizzle-orm": "0.45.1",
+    "drizzle-zod": "0.8.3",
     "hono": "4.12.8",
     "loglayer": "9.1.0",
     "pg": "8.20.0",

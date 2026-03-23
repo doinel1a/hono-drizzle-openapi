@@ -30,7 +30,7 @@ export default defineConfig([
       'unicorn/prevent-abbreviations': [
         'error',
         {
-          ignore: [/env/i, /db/i, /doc/i]
+          ignore: [/env/i, /db/i, /doc/i, /param/i]
         }
       ]
     }
