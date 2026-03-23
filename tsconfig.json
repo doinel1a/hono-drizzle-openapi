@@ -32,7 +32,6 @@
     "noUncheckedSideEffectImports": true,
 
     /* Path Aliases */
-    "baseUrl": "./",
     "paths": {
       "~/drizzle/*": ["./drizzle/*"],
       "@/*": ["./src/*"]
