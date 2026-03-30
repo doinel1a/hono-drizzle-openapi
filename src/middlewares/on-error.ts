@@ -15,7 +15,7 @@ const onError: ErrorHandler = (error, c) => {
       ? INTERNAL_SERVER_ERROR_CODE
       : (currentStatus as ContentfulStatusCode);
 
-  c.var.logger.withError(error).error(INTERNAL_SERVER_ERROR_PHRASE);
+  c.var['logger'].withError(error).error(INTERNAL_SERVER_ERROR_PHRASE);
 
   return c.json(
     {
