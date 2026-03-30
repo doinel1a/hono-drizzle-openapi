@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-null */
-
 import type { TRouteHandler } from '@/lib/types';
 import type {
   TDeleteByIdRoute,
