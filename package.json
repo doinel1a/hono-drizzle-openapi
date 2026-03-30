@@ -15,7 +15,7 @@
     "prepare": "husky",
     "dev": "tsx src/env.ts && tsx watch src/index.ts",
     "build": "tsup",
-    "start": "node dist/index.js",
+    "start": "tsx src/env.ts && node dist/index.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -27,14 +27,14 @@
     "db:migrate": "drizzle-kit --config=db/config.ts migrate"
   },
   "dependencies": {
-    "@hono/node-server": "1.19.11",
-    "@hono/zod-openapi": "1.2.3",
+    "@hono/node-server": "1.19.12",
+    "@hono/zod-openapi": "1.2.4",
     "@loglayer/hono": "2.1.0",
     "@loglayer/transport-simple-pretty-terminal": "3.0.2",
-    "@scalar/hono-api-reference": "0.10.4",
+    "@scalar/hono-api-reference": "0.10.5",
     "@t3-oss/env-core": "0.13.11",
     "dotenv": "17.3.1",
-    "drizzle-orm": "0.45.1",
+    "drizzle-orm": "0.45.2",
     "drizzle-zod": "0.8.3",
     "hono": "4.12.9",
     "loglayer": "9.1.0",
@@ -54,14 +54,14 @@
     "eslint-plugin-drizzle": "0.2.3",
     "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-sonarjs": "4.0.2",
-    "eslint-plugin-unicorn": "63.0.0",
+    "eslint-plugin-unicorn": "64.0.0",
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "prettier": "3.8.1",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
     "typescript": "6.0.2",
-    "typescript-eslint": "8.57.2",
-    "vitest": "4.1.1"
+    "typescript-eslint": "8.58.0",
+    "vitest": "4.1.2"
   }
 }
