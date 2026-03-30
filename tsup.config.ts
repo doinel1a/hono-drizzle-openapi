@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup';
 
-import './src/env';
+import '@/env';
 
 export default defineConfig({
   entry: ['src/index.ts'],
