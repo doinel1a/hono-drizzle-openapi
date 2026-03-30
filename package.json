@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/doinel1a/node-ts-base"
+    "url": "https://github.com/doinel1a/hono-drizzle-openapi"
   },
   "scripts": {
     "prepare": "husky",
