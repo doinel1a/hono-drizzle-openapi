@@ -1,43 +1,79 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
+    // ==========================================================================
+    // PROJECTS
+    // ==========================================================================
+    "incremental": true,
+    "tsBuildInfoFile": "dist/.cache/.tsbuildinfo",
+
+    // ==========================================================================
+    // LANGUAGE & ENVIRONMENT
+    // ==========================================================================
     "target": "esnext",
-    "allowJs": false,
-    "resolveJsonModule": true,
     "moduleDetection": "force",
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
 
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "exactOptionalPropertyTypes": true,
-    "noImplicitReturns": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    /* Transpiling with TypeScript: */
+    // ==========================================================================
+    // MODULES
+    // ==========================================================================
     "module": "esnext",
     "moduleResolution": "bundler",
-    "outDir": "dist",
-    "sourceMap": true,
-
-    /* Bundled projects */
-    "jsx": "react-jsx",
-    "incremental": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Path Aliases */
     "paths": {
+      "~/*": ["./*"],
       "~/drizzle/*": ["./drizzle/*"],
       "@/*": ["./src/*"]
     },
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "noUncheckedSideEffectImports": true,
 
-    "types": ["node"]
+    // ==========================================================================
+    // JAVASCRIPT SUPPORT
+    // ==========================================================================
+    "allowJs": false,
+
+    // ==========================================================================
+    // EMIT
+    // ==========================================================================
+    "outDir": "dist",
+    "sourceMap": true,
+
+    // ==========================================================================
+    // INTEROP CONSTRAINTS
+    // ==========================================================================
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // ==========================================================================
+    // TYPE CHECKING
+    // ==========================================================================
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    // ==========================================================================
+    // OUTPUT FORMATTING
+    // ==========================================================================
+    "noErrorTruncation": true,
+
+    // ==========================================================================
+    // COMPLETENESS
+    // ==========================================================================
+    "skipLibCheck": true
   },
+
+  // ============================================================================
+  // FILE EXCLUSION
+  // ============================================================================
   "exclude": ["node_modules"]
 }
