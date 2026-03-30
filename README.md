@@ -1,1 +1,1 @@
-# node-ts-base
+# hono-drizzle-openapi
