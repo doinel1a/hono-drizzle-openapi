@@ -1,4 +1,9 @@
-import type { ZodSchema } from '../utils/types.js';
+/* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
+import type { ZodSchema } from '../utils/types';
 
 import { z } from '@hono/zod-openapi';
 
