@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-export default {
+const config = {
   resolve: {
     alias: {
       '~/drizzle': path.resolve(__dirname, './drizzle'),
@@ -8,3 +8,5 @@ export default {
     }
   }
 };
+
+export default config;

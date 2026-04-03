@@ -8,7 +8,9 @@ const eslint = (fileNames: string[]) =>
 const prettier = (fileNames: string[]) =>
   `prettier --write ${fileNames.map((fileName) => path.relative(process.cwd(), fileName)).join(' ')} --cache`;
 
-export default {
+const config = {
   '*.{ts,mts,cts}': [tsc],
   '*.{js,mjs,cjs,ts,mts,cts}': [eslint, prettier]
 };
+
+export default config;
