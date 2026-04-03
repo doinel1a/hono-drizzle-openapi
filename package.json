@@ -21,10 +21,10 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write **/**/*.{js,mjs,cjs,ts,mts,cts} --cache",
     "test": "vitest",
-    "db:studio": "drizzle-kit --config=db/config.ts studio",
-    "db:push": "drizzle-kit --config=db/config.ts push",
-    "db:create-migration": "drizzle-kit --config=db/config.ts generate",
-    "db:migrate": "drizzle-kit --config=db/config.ts migrate"
+    "db:studio": "drizzle-kit --config=drizzle/config.ts studio",
+    "db:push": "drizzle-kit --config=drizzle/config.ts push",
+    "db:create-migration": "drizzle-kit --config=drizzle/config.ts generate",
+    "db:migrate": "drizzle-kit --config=drizzle/config.ts migrate"
   },
   "dependencies": {
     "@hono/node-server": "1.19.12",
