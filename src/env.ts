@@ -7,6 +7,7 @@ config();
 export const env = createEnv({
   server: {
     PORT: z.coerce.number(),
+    ORIGIN: z.url(),
     DATABASE_URL: z.url(),
     BETTER_AUTH_URL: z.url(),
     BETTER_AUTH_SECRET: z.string().min(32),
@@ -14,6 +15,7 @@ export const env = createEnv({
   },
   runtimeEnvStrict: {
     PORT: process.env['PORT'],
+    ORIGIN: process.env['ORIGIN'],
     DATABASE_URL: process.env['DATABASE_URL'],
     BETTER_AUTH_URL: process.env['BETTER_AUTH_URL'],
     BETTER_AUTH_SECRET: process.env['BETTER_AUTH_SECRET'],
