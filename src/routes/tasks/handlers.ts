@@ -2,7 +2,7 @@ import type { TRouteHandler } from '@/lib/types';
 import type {
   TDeleteByIdRoute,
   TInsertRoute,
-  TPathRoute,
+  TPatchRoute,
   TSelectAllRoute,
   TSelectByIdRoute
 } from './routes';
@@ -89,7 +89,7 @@ export const selectAll: TRouteHandler<TSelectAllRoute> = async (c) => {
   }
 };
 
-export const patch: TRouteHandler<TPathRoute> = async (c) => {
+export const patch: TRouteHandler<TPatchRoute> = async (c) => {
   const { id } = c.req.valid('param');
   const patch = c.req.valid('json');
 
