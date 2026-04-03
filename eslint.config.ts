@@ -1,7 +1,6 @@
-import prettierConfig from 'eslint-config-prettier/flat';
 // @ts-expect-error - No types for this plugin
-import drizzlePlugin from 'eslint-plugin-drizzle';
-import prettierPlugin from 'eslint-plugin-prettier/recommended';
+import drizzle from 'eslint-plugin-drizzle';
+import prettier from 'eslint-plugin-prettier/recommended';
 import { configs as sonarjs } from 'eslint-plugin-sonarjs';
 import unicorn from 'eslint-plugin-unicorn';
 import { defineConfig } from 'eslint/config';
@@ -29,8 +28,9 @@ export default defineConfig([
     rules: {
       '@typescript-eslint/consistent-type-imports': [
         'error',
-        { prefer: 'type-imports', fixStyle: 'inline-type-imports' }
+        { prefer: 'type-imports', fixStyle: 'separate-type-imports' }
       ],
+      '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         { selector: 'typeLike', format: ['PascalCase'] },
@@ -72,13 +72,12 @@ export default defineConfig([
       '@typescript-eslint/consistent-type-definitions': 'off'
     }
   },
-  prettierConfig,
-  prettierPlugin,
+  prettier,
   {
     files: ['**/*.ts'],
     plugins: {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      drizzle: drizzlePlugin
+      drizzle: drizzle
     },
     rules: {
       'drizzle/enforce-update-with-where': ['error', { drizzleObjectName: 'db' }],
