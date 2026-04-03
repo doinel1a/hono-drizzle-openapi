@@ -20,4 +20,4 @@ export const insertTasksSchema = createInsertSchema(tasksSchema, {
 
 export const selectTasksSchema = createSelectSchema(tasksSchema);
 
-export const patchTodoSchema = insertTasksSchema.partial();
+export const patchTasksSchema = insertTasksSchema.partial();
