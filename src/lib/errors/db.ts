@@ -39,7 +39,7 @@ export default class DatabaseError extends Error {
 
   constructor(cause: unknown) {
     const code = DatabaseError.extractErrorCode(cause);
-    super(code ? DB_ALL_ERRORS_MAP[code] : 'Database - Unknown error');
+    super(code ? DB_ALL_ERRORS_MAP[code] : 'Database - Unknown error', { cause });
     this.name = 'DatabaseError';
     this.status = DatabaseError.resolveStatus(code);
   }
