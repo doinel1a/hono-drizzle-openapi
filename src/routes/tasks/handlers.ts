@@ -49,16 +49,15 @@ export const patch: TRouteHandler<TPatchRoute> = async (c) => {
   const { id } = c.req.valid('param');
   const patch = c.req.valid('json');
 
-  const taskToPatch = await db.query.tasks.findFirst({ where: eq(tasksSchema.id, id) });
-  if (!taskToPatch) {
-    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
-  }
-
   const [patchedTask] = await db
     .update(tasksSchema)
     .set(patch)
     .where(eq(tasksSchema.id, id))
     .returning();
+
+  if (!patchedTask) {
+    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
+  }
 
   return c.json(patchedTask, OK_CODE);
 };
