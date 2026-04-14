@@ -12,22 +12,20 @@ export default function createErrorSchema<TSchema extends ZodSchema>(schema: TSc
   const { error } = schema.safeParse(isArrayRoot ? [] : {});
 
   return z.object({
-    success: z.boolean().openapi({
-      example: false
+    message: z.string().openapi({
+      example: 'Validation failed'
     }),
-    error: z
-      .object({
-        issues: z.array(
-          z.object({
-            code: z.string(),
-            path: z.array(z.union([z.string(), z.number()])),
-            message: z.string().optional()
-          })
-        ),
-        name: z.string()
-      })
+    errors: z
+      .array(
+        z.object({
+          code: z.string(),
+          path: z.array(z.union([z.string(), z.number()])),
+          message: z.string().optional()
+        })
+      )
+      .optional()
       .openapi({
-        example: error
+        example: error?.issues
       })
   });
 }

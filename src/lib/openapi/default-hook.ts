@@ -8,8 +8,8 @@ const defaultHook: Hook<any, any, any, any> = (result, c) => {
   if (!result.success) {
     return c.json(
       {
-        success: result.success,
-        error: result.error
+        message: 'Validation failed',
+        errors: result.error.issues
       },
       UNPROCESSABLE_ENTITY_CODE
     );
