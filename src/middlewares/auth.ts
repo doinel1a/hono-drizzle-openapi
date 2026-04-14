@@ -3,6 +3,7 @@ import type { TServerBindings } from '../lib/types';
 
 import { cors as honoCors } from 'hono/cors';
 import { createMiddleware } from 'hono/factory';
+import { HTTPException } from 'hono/http-exception';
 
 import { env } from '../env';
 import authConfig from '../lib/auth';
@@ -14,15 +15,19 @@ const auth = createMiddleware<TServerBindings>(async (c, next) => {
 
   try {
     session = await authConfig.api.getSession({ headers: c.req.raw.headers });
-  } catch {
-    return c.json({ message: UNAUTHORIZED_PHRASE }, UNAUTHORIZED_CODE);
+  } catch (error) {
+    if (error instanceof HTTPException && error.status === 401) {
+      throw new HTTPException(UNAUTHORIZED_CODE, { message: UNAUTHORIZED_PHRASE });
+    }
+
+    throw error;
   }
 
   if (!session) {
     c.set('session', null);
     c.set('user', null);
 
-    return c.json({ message: UNAUTHORIZED_PHRASE }, UNAUTHORIZED_CODE);
+    throw new HTTPException(UNAUTHORIZED_CODE, { message: UNAUTHORIZED_PHRASE });
   }
 
   c.set('session', session.session);
