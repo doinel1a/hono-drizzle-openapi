@@ -1,28 +1,30 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
+import type { TServerBindings } from '@/lib/types';
 import type { ErrorHandler } from 'hono';
 import type { ContentfulStatusCode } from 'hono/utils/http-status';
 
+import { HTTPException } from 'hono/http-exception';
+
 import { env } from '@/env';
-import { INTERNAL_SERVER_ERROR_CODE, OK_CODE } from '@/lib/constants/http-status-codes';
+import { INTERNAL_SERVER_ERROR_CODE } from '@/lib/constants/http-status-codes';
 import { INTERNAL_SERVER_ERROR_PHRASE } from '@/lib/constants/http-status-phrases';
+import DatabaseError from '@/lib/errors/db';
 
-const onError: ErrorHandler = (error, c) => {
-  const environment = c.env?.NODE_ENV ?? env.NODE_ENV;
-  const currentStatus = 'status' in error ? error.status : c.newResponse(null).status;
-  const statusCode =
-    currentStatus === OK_CODE
-      ? INTERNAL_SERVER_ERROR_CODE
-      : (currentStatus as ContentfulStatusCode);
+const onError: ErrorHandler<TServerBindings> = (genericError, c) => {
+  if (DatabaseError.isKnownError(genericError)) {
+    const error = new DatabaseError(genericError);
+    c.var.logger.withError(genericError).error(error.message);
+    return c.json({ message: error.message }, error.status);
+  }
 
-  c.var['logger'].withError(error).error(INTERNAL_SERVER_ERROR_PHRASE);
+  const statusCode: ContentfulStatusCode =
+    genericError instanceof HTTPException ? genericError.status : INTERNAL_SERVER_ERROR_CODE;
+
+  c.var.logger.withError(genericError).error(INTERNAL_SERVER_ERROR_PHRASE);
 
   return c.json(
     {
-      message: error.message,
-      stack: environment === 'production' ? undefined : error.stack
+      message: genericError.message,
+      stack: env.NODE_ENV === 'production' ? undefined : genericError.stack
     },
     statusCode
   );
