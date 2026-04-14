@@ -17,11 +17,10 @@ const auth = betterAuth({
   plugins: [openAPI()]
 });
 
-export type TSession = typeof auth.$Infer.Session;
+export type TAuthSession = typeof auth.$Infer.Session;
 
-export type TAuth = {
-  user: typeof auth.$Infer.Session.user | null;
-  session: typeof auth.$Infer.Session.session | null;
-};
+export type TAuth =
+  | { user: TAuthSession['user']; session: TAuthSession['session'] }
+  | { user: null; session: null };
 
 export default auth;
