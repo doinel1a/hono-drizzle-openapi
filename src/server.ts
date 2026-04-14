@@ -1,8 +1,10 @@
+import db from '~/drizzle/db';
+
 import initDocs from '@/lib/init-docs';
 import initServer from '@/lib/init-server';
-import tasksRoute from '@/routes/tasks/_index';
+import initTasksRoutes from '@/routes/tasks/_index';
 
-const routes = [tasksRoute];
+const routes = [initTasksRoutes(db)];
 
 const server = initServer();
 initDocs(server);

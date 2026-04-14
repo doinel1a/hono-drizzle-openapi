@@ -1,4 +1,4 @@
-import type { TRouteHandler } from '@/lib/types';
+import type { TDatabase, TRouteHandler } from '@/lib/types';
 import type {
   TDeleteByIdRoute,
   TInsertRoute,
@@ -7,7 +7,6 @@ import type {
   TSelectByIdRoute
 } from './routes';
 
-import db from '~/drizzle/db';
 import { tasksSchema } from '~/drizzle/schemas/tasks';
 import { eq } from 'drizzle-orm';
 import { HTTPException } from 'hono/http-exception';
@@ -20,55 +19,59 @@ import {
 } from '@/lib/constants/http-status-codes';
 import { NOT_FOUND_PHRASE } from '@/lib/constants/http-status-phrases';
 
-export const insert: TRouteHandler<TInsertRoute> = async (c) => {
-  const taskToInsert = c.req.valid('json');
+export default function initHandlers(db: TDatabase) {
+  const insert: TRouteHandler<TInsertRoute> = async (c) => {
+    const taskToInsert = c.req.valid('json');
 
-  const [insertedTask] = await db.insert(tasksSchema).values(taskToInsert).returning();
+    const [insertedTask] = await db.insert(tasksSchema).values(taskToInsert).returning();
 
-  return c.json(insertedTask, CREATED_CODE);
-};
+    return c.json(insertedTask, CREATED_CODE);
+  };
 
-export const selectById: TRouteHandler<TSelectByIdRoute> = async (c) => {
-  const { id } = c.req.valid('param');
+  const selectById: TRouteHandler<TSelectByIdRoute> = async (c) => {
+    const { id } = c.req.valid('param');
 
-  const task = await db.query.tasks.findFirst({ where: eq(tasksSchema.id, id) });
-  if (!task) {
-    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
-  }
+    const task = await db.query.tasks.findFirst({ where: eq(tasksSchema.id, id) });
+    if (!task) {
+      throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
+    }
 
-  return c.json(task, OK_CODE);
-};
+    return c.json(task, OK_CODE);
+  };
 
-export const selectAll: TRouteHandler<TSelectAllRoute> = async (c) => {
-  const tasks = await db.query.tasks.findMany();
+  const selectAll: TRouteHandler<TSelectAllRoute> = async (c) => {
+    const tasks = await db.query.tasks.findMany();
 
-  return c.json(tasks, OK_CODE);
-};
+    return c.json(tasks, OK_CODE);
+  };
 
-export const patch: TRouteHandler<TPatchRoute> = async (c) => {
-  const { id } = c.req.valid('param');
-  const patch = c.req.valid('json');
+  const patch: TRouteHandler<TPatchRoute> = async (c) => {
+    const { id } = c.req.valid('param');
+    const patch = c.req.valid('json');
 
-  const [patchedTask] = await db
-    .update(tasksSchema)
-    .set(patch)
-    .where(eq(tasksSchema.id, id))
-    .returning();
+    const [patchedTask] = await db
+      .update(tasksSchema)
+      .set(patch)
+      .where(eq(tasksSchema.id, id))
+      .returning();
 
-  if (!patchedTask) {
-    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
-  }
+    if (!patchedTask) {
+      throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
+    }
 
-  return c.json(patchedTask, OK_CODE);
-};
+    return c.json(patchedTask, OK_CODE);
+  };
 
-export const deleteById: TRouteHandler<TDeleteByIdRoute> = async (c) => {
-  const { id } = c.req.valid('param');
+  const deleteById: TRouteHandler<TDeleteByIdRoute> = async (c) => {
+    const { id } = c.req.valid('param');
 
-  const [deletedTask] = await db.delete(tasksSchema).where(eq(tasksSchema.id, id)).returning();
-  if (!deletedTask) {
-    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
-  }
+    const [deletedTask] = await db.delete(tasksSchema).where(eq(tasksSchema.id, id)).returning();
+    if (!deletedTask) {
+      throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
+    }
 
-  return c.body(null, NO_CONTENT_CODE);
-};
+    return c.body(null, NO_CONTENT_CODE);
+  };
+
+  return { insert, selectById, selectAll, patch, deleteById };
+}

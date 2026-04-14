@@ -1,6 +1,5 @@
 import { createRoute, z } from '@hono/zod-openapi';
 import { insertTasksSchema, patchTasksSchema, selectTasksSchema } from '~/drizzle/schemas/tasks';
-import auth from '~/src/middlewares/auth';
 
 import {
   CONFLICT_CODE,
@@ -20,6 +19,7 @@ import createError from '@/lib/openapi/schemas/create-error';
 import idParamsSchema from '@/lib/openapi/schemas/id-params';
 import jsonContent from '@/lib/openapi/utils/json-content';
 import jsonContentRequired from '@/lib/openapi/utils/json-content-required';
+import auth from '@/middlewares/auth';
 
 const tags = ['Tasks'];
 
