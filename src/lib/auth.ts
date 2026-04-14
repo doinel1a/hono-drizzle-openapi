@@ -17,6 +17,8 @@ const auth = betterAuth({
   plugins: [openAPI()]
 });
 
+export type TSession = typeof auth.$Infer.Session;
+
 export type TAuth = {
   user: typeof auth.$Infer.Session.user | null;
   session: typeof auth.$Infer.Session.session | null;

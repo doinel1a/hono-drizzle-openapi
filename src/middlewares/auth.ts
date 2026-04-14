@@ -1,3 +1,4 @@
+import type { TSession } from '../lib/auth';
 import type { TServerBindings } from '../lib/types';
 
 import { cors as honoCors } from 'hono/cors';
@@ -9,7 +10,14 @@ import { UNAUTHORIZED_CODE } from '../lib/constants/http-status-codes';
 import { UNAUTHORIZED_PHRASE } from '../lib/constants/http-status-phrases';
 
 const auth = createMiddleware<TServerBindings>(async (c, next) => {
-  const session = await authConfig.api.getSession({ headers: c.req.raw.headers });
+  let session: TSession | null = null;
+
+  try {
+    session = await authConfig.api.getSession({ headers: c.req.raw.headers });
+  } catch {
+    return c.json({ message: UNAUTHORIZED_PHRASE }, UNAUTHORIZED_CODE);
+  }
+
   if (!session) {
     c.set('session', null);
     c.set('user', null);
