@@ -10,6 +10,7 @@ import type {
 import db from '~/drizzle/db';
 import { tasksSchema } from '~/drizzle/schemas/tasks';
 import { eq } from 'drizzle-orm';
+import { HTTPException } from 'hono/http-exception';
 
 import {
   CREATED_CODE,
@@ -32,7 +33,7 @@ export const selectById: TRouteHandler<TSelectByIdRoute> = async (c) => {
 
   const task = await db.query.tasks.findFirst({ where: eq(tasksSchema.id, id) });
   if (!task) {
-    return c.json({ message: NOT_FOUND_PHRASE }, NOT_FOUND_CODE);
+    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
   }
 
   return c.json(task, OK_CODE);
@@ -50,7 +51,7 @@ export const patch: TRouteHandler<TPatchRoute> = async (c) => {
 
   const taskToPatch = await db.query.tasks.findFirst({ where: eq(tasksSchema.id, id) });
   if (!taskToPatch) {
-    return c.json({ message: NOT_FOUND_PHRASE }, NOT_FOUND_CODE);
+    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
   }
 
   const [patchedTask] = await db
@@ -67,7 +68,7 @@ export const deleteById: TRouteHandler<TDeleteByIdRoute> = async (c) => {
 
   const [deletedTask] = await db.delete(tasksSchema).where(eq(tasksSchema.id, id)).returning();
   if (!deletedTask) {
-    return c.json({ message: NOT_FOUND_PHRASE }, NOT_FOUND_CODE);
+    throw new HTTPException(NOT_FOUND_CODE, { message: NOT_FOUND_PHRASE });
   }
 
   return c.body(null, NO_CONTENT_CODE);

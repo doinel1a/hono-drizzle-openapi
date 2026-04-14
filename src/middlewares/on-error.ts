@@ -1,6 +1,5 @@
 import type { TServerBindings } from '@/lib/types';
 import type { ErrorHandler } from 'hono';
-import type { ContentfulStatusCode } from 'hono/utils/http-status';
 
 import { HTTPException } from 'hono/http-exception';
 
@@ -16,8 +15,9 @@ const onError: ErrorHandler<TServerBindings> = (genericError, c) => {
     return c.json({ message: error.message }, error.status);
   }
 
-  const statusCode: ContentfulStatusCode =
-    genericError instanceof HTTPException ? genericError.status : INTERNAL_SERVER_ERROR_CODE;
+  if (genericError instanceof HTTPException) {
+    return c.json({ message: genericError.message }, genericError.status);
+  }
 
   c.var.logger.withError(genericError).error(INTERNAL_SERVER_ERROR_PHRASE);
 
@@ -26,7 +26,7 @@ const onError: ErrorHandler<TServerBindings> = (genericError, c) => {
       message: genericError.message,
       stack: env.NODE_ENV === 'production' ? undefined : genericError.stack
     },
-    statusCode
+    INTERNAL_SERVER_ERROR_CODE
   );
 };
 
