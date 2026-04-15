@@ -15,15 +15,16 @@ import {
   CREATED_CODE,
   NO_CONTENT_CODE,
   NOT_FOUND_CODE,
-  OK_CODE
+  OK_CODE,
+  UNPROCESSABLE_ENTITY_CODE
 } from '@/lib/constants/http-status-codes';
-import { NOT_FOUND_PHRASE } from '@/lib/constants/http-status-phrases';
+import { NOT_FOUND_PHRASE, UNPROCESSABLE_ENTITY_PHRASE } from '@/lib/constants/http-status-phrases';
 
 export default function initHandlers(db: TDatabase) {
   const insert: TRouteHandler<TInsertRoute> = async (c) => {
-    const taskToInsert = c.req.valid('json');
+    const body = c.req.valid('json');
 
-    const [insertedTask] = await db.insert(tasksSchema).values(taskToInsert).returning();
+    const [insertedTask] = await db.insert(tasksSchema).values(body).returning();
 
     return c.json(insertedTask, CREATED_CODE);
   };
@@ -47,11 +48,14 @@ export default function initHandlers(db: TDatabase) {
 
   const patch: TRouteHandler<TPatchRoute> = async (c) => {
     const { id } = c.req.valid('param');
-    const patch = c.req.valid('json');
+    const body = c.req.valid('json');
+    if (Object.keys(body).length === 0) {
+      throw new HTTPException(UNPROCESSABLE_ENTITY_CODE, { message: UNPROCESSABLE_ENTITY_PHRASE });
+    }
 
     const [patchedTask] = await db
       .update(tasksSchema)
-      .set(patch)
+      .set(body)
       .where(eq(tasksSchema.id, id))
       .returning();
 
