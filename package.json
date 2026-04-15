@@ -47,6 +47,7 @@
   "devDependencies": {
     "@commitlint/cli": "20.5.0",
     "@commitlint/config-conventional": "20.5.0",
+    "@electric-sql/pglite": "0.4.4",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
     "@types/node": "25.6.0",
     "@types/pg": "8.20.0",
