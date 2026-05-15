@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import { initTestApp, mockSession } from '~/__tests__/utils/app';
+import { initTestDatabase } from '~/__tests__/utils/db';
 import { tasksSchema } from '~/drizzle/schemas/tasks';
-import { initTestApp, mockSession } from '~/tests/utils/app';
-import { initTestDatabase } from '~/tests/utils/db';
 import { eq } from 'drizzle-orm';
 import { testClient } from 'hono/testing';
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';

@@ -17,8 +17,8 @@ const vitest = (fileNames: string[]) => {
       const withoutExtension = withoutSource.replace(/\.ts$/, '');
 
       return [
-        path.join('tests', 'unit', `${withoutExtension}.test.ts`),
-        path.join('tests', 'integration', `${withoutExtension}.test.ts`)
+        path.join('__tests__', 'unit', `${withoutExtension}.test.ts`),
+        path.join('__tests__', 'integration', `${withoutExtension}.test.ts`)
       ];
     })
     .filter((testFile) => fs.existsSync(testFile));

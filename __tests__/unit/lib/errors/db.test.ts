@@ -1,4 +1,4 @@
-import { createDatabaseError } from '~/tests/utils/db';
+import { createDatabaseError } from '~/__tests__/utils/db';
 import { describe, expect, it } from 'vitest';
 
 import {

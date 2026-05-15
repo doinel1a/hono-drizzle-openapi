@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { honoLogLayer } from '@loglayer/hono';
-import { createDatabaseError } from '~/tests/utils/db';
+import { createDatabaseError } from '~/__tests__/utils/db';
 import { HTTPException } from 'hono/http-exception';
 import { describe, expect, it } from 'vitest';
 
