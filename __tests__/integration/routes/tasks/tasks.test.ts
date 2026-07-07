@@ -33,8 +33,8 @@ beforeEach(async () => {
 
 afterAll(() => close());
 
-async function seedTask(name: string, done = false) {
-  const [task] = await db.insert(tasksSchema).values({ name, done }).returning();
+async function seedTask(name: string, isDone = false) {
+  const [task] = await db.insert(tasksSchema).values({ name, done: isDone }).returning();
   return task;
 }
 

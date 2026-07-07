@@ -123,6 +123,7 @@ export const patch = createRoute({
 });
 
 export type TDeleteByIdRoute = typeof deleteById;
+// eslint-disable-next-line unicorn/no-non-function-verb-prefix
 export const deleteById = createRoute({
   path: '/tasks/{id}',
   method: 'delete',

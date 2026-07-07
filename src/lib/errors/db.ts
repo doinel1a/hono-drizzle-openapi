@@ -45,30 +45,30 @@ export default class DatabaseError extends Error {
   }
 
   static isKnownError(error: unknown) {
-    return !!DatabaseError.extractErrorCode(error);
+    return !!this.extractErrorCode(error);
   }
 
   static isConnectionError(error: unknown) {
-    const code = DatabaseError.extractErrorCode(error);
-    return !!code && code in DB_CONNECTION_ERROR_MAP;
+    const code = this.extractErrorCode(error);
+    return !!code && Object.hasOwn(DB_CONNECTION_ERROR_MAP, code);
   }
 
   static isConflictError(error: unknown) {
-    const code = DatabaseError.extractErrorCode(error);
-    return !!code && code in DB_CONFLICT_ERROR_MAP;
+    const code = this.extractErrorCode(error);
+    return !!code && Object.hasOwn(DB_CONFLICT_ERROR_MAP, code);
   }
 
   static isUnprocessableEntityError(error: unknown) {
-    const code = DatabaseError.extractErrorCode(error);
-    return !!code && code in DB_UNPROCESSABLE_ENTITY_ERROR_MAP;
+    const code = this.extractErrorCode(error);
+    return !!code && Object.hasOwn(DB_UNPROCESSABLE_ENTITY_ERROR_MAP, code);
   }
 
   private static resolveStatus(code: TDBAllErrorsErrorCode | undefined) {
-    if (code && code in DB_CONFLICT_ERROR_MAP) {
+    if (code && Object.hasOwn(DB_CONFLICT_ERROR_MAP, code)) {
       return CONFLICT_CODE;
     }
 
-    if (code && code in DB_UNPROCESSABLE_ENTITY_ERROR_MAP) {
+    if (code && Object.hasOwn(DB_UNPROCESSABLE_ENTITY_ERROR_MAP, code)) {
       return UNPROCESSABLE_ENTITY_CODE;
     }
 
@@ -81,7 +81,7 @@ export default class DatabaseError extends Error {
       error.cause &&
       'code' in error.cause &&
       typeof error.cause.code === 'string' &&
-      error.cause.code in DB_ALL_ERRORS_MAP
+      Object.hasOwn(DB_ALL_ERRORS_MAP, error.cause.code)
     ) {
       return error.cause.code as TDBAllErrorsErrorCode;
     }

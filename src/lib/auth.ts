@@ -20,7 +20,6 @@ const auth = betterAuth({
 export type TAuthSession = typeof auth.$Infer.Session;
 
 export type TAuth =
-  | { user: TAuthSession['user']; session: TAuthSession['session'] }
-  | { user: null; session: null };
+  { user: TAuthSession['user']; session: TAuthSession['session'] } | { user: null; session: null };
 
 export default auth;
