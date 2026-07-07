@@ -90,12 +90,22 @@ export default defineConfig([
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-unused-vars': 'off', // Covered by @typescript-eslint
 
-      'unicorn/prevent-abbreviations': [
+      'unicorn/filename-case': [
+        'error',
+        {
+          ignore: [/tests/i]
+        }
+      ],
+
+      'unicorn/name-replacements': [
         'error',
         {
           ignore: [/env/i, /db/i, /doc/i, /param/i]
         }
       ],
+
+      'unicorn/max-nested-calls': 'off',
+      'unicorn/consistent-class-member-order': 'off',
 
       'sonarjs/deprecation': 'off', // Covered by @typescript-eslint
       'sonarjs/no-array-delete': 'off', // Covered by @typescript-eslint
