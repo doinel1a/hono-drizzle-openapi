@@ -1,2 +1,5 @@
 allowBuilds:
   esbuild: true
+
+blockExoticSubdeps: true
+minimumReleaseAge: 10080 # 7 days
