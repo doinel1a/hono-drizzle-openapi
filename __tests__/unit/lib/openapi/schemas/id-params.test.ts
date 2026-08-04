@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/parameterized-tests */
+
 import { describe, expect, it } from 'vitest';
 
 import idParametersSchema from '@/lib/openapi/schemas/id-params';
